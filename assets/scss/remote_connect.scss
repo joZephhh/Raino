@@ -1,0 +1,24 @@
+$main-color: #2ecc71;
+body {
+    background: black;
+    width: 400px;
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    h1,h3,h4 {
+        text-align: center;
+        font-family: sans-serif;
+        color: white;
+        &.active {
+            color: $main-color;
+        }
+    }
+    #qrCode {
+        margin: 0 auto;
+        img {
+            margin: 0 auto;
+        }
+    }
+}

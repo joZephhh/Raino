@@ -1,0 +1,18 @@
+{
+  "name": "Raino",
+  "version": "1.0.5",
+  "description": "The coolest way to watch videos on your computer and control it via your smartphone",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "deploy": "electron-packager ./ --darwin --icon'icon/play-button.icns' --overwrite"
+  },
+  "author": "Joseph Q. - josephquercia.fr",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "socketio": "^1.0.0",
+    "electron": "^1.4.1"
+  }
+}
