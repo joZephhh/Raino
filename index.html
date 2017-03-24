@@ -12,65 +12,68 @@
 <body>
     <div class="container">
         <div class="player">
-
-
             <div class="drag-me">
                 <div class="drag-me-popup">
                     <i class="fa fa-file-video-o" aria-hidden="true"></i>
                     <h3>Drag any video here to begin...</h3>
-
                 </div>
             </div>
-            <video src="#"></video>
+            <div class="playlist">
+                <!-- ALL VIDEOS -->
+            </div>
+            <div class="player-container">
+                <video src="#"></video>
 
-            <div class="player-bar player-overlay">
+                <div class="player-bar player-overlay">
+                    <div class="controls">
+                        <a href="#" class="go-prev"><i class="fa fa-backward" aria-hidden="true"></i></a>
+                        <a href="#" class="toggle-play"><i class="fa fa-play" aria-hidden="true"></i><i class="fa fa-pause" aria-hidden="true"></i></a>
+                        <a href="#" class="go-next"><i class="fa fa-forward" aria-hidden="true"></i></a>
+                    </div>
 
-                <div class="controls">
-                    <a href="#" class="go-prev"><i class="fa fa-backward" aria-hidden="true"></i></a>
-                    <a href="#" class="toggle-play"><i class="fa fa-play" aria-hidden="true"></i><i class="fa fa-pause" aria-hidden="true"></i></a>
-                    <a href="#" class="go-next"><i class="fa fa-forward" aria-hidden="true"></i></a>
-                </div>
+                    <div class="seek-bar bar">
 
-                <div class="seek-bar bar">
-
-                    <div class="thumbmail">
-                        <div class="thumbmail-container">
-                            <video class="thumbmail-video" src="#" mute></video>
-                            <div class="thumbmail-time-container">
-                                <div class="thumbmail-video-time-content">
-                                    <span>1:78</span>
+                        <div class="thumbmail">
+                            <div class="thumbmail-container">
+                                <video class="thumbmail-video" src="#" mute></video>
+                                <div class="thumbmail-time-container">
+                                    <div class="thumbmail-video-time-content">
+                                        <span>1:78</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="seek-bar-full">
-                        <div class="seek-bar-progress">
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="controls-plus">
-                    <a href="#" class="sound">
-                        <!-- icons -->
-                        <span class="contain-icons"><i class="fa fa-volume-up" aria-hidden="true"></i><i class="fa fa-volume-off" aria-hidden="true"></i></span>
-                        <!-- bar -->
-                        <div class="sound-bar bar">
-                            <div class="sound-bar-full">
-                                <div class="sound-bar-progress"></div>
+                        <div class="seek-bar-full">
+                            <div class="seek-bar-progress">
                             </div>
                         </div>
-                    </a>
-                    <a href="#" class="fullscreen"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a>
+
+                    </div>
+
+                    <div class="controls-plus">
+                        <a href="#" class="sound">
+                            <!-- icons -->
+                            <span class="contain-icons"><i class="fa fa-volume-up" aria-hidden="true"></i><i class="fa fa-volume-off" aria-hidden="true"></i></span>
+                            <!-- bar -->
+                            <div class="sound-bar bar">
+                                <div class="sound-bar-full">
+                                    <div class="sound-bar-progress"></div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="fullscreen"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a>
+                    </div>
+
                 </div>
 
-            </div>
+                <div class="controls-top player-overlay">
+                    <a href="#" class="playlist_icon"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                    <a href="readme.md" target="_blank" class="help"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                    <a href="#" class="remote"><i class="fa fa-mobile" aria-hidden="true"></i></a>
 
-            <div class="controls-top player-overlay">
-                <a href="readme.md" target="_blank" class="help"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                <a href="#" class="remote"><i class="fa fa-mobile" aria-hidden="true"></i></a>
 
+                </div>
             </div>
 
 
