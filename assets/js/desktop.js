@@ -277,12 +277,14 @@ document.body.ondrop = (ev) => {
                      isDbclick = 0;
 
          }else if (e.keyCode == 70) {
-         fullscreen();
+        //  fullscreen();
+        console.log("it's coming!");
      } else if (e.keyCode == 77) {
          mute();
      } else if (e.keyCode == 27) {
          // dont work, it seems that the browser function go ahead
-         exit_fullscreen();
+        //  exit_fullscreen();
+        console.log("it's coming!");
      } else if (e.keyCode == 38) {
          soundUpdate("up")
      } else if (e.keyCode == 40) {
@@ -353,7 +355,8 @@ document.body.ondrop = (ev) => {
  })
 
  player.el.fullscreen_btn.addEventListener("click", function(e) {
-     fullscreen();
+    //  fullscreen();
+    console.log("it's coming!");
  })
 
  player.el.remote_btn.addEventListener("click", function(e) {
@@ -587,20 +590,20 @@ function updatePlaylist(index) {
     }
     player.el.playlist_els[index].classList.add("active");
 }
- function fullscreen() {
-     if (!player.status.isFullscreen) {
-         player.status.isFullscreen = true;
-         player.el.container.webkitRequestFullScreen();
-
-     } else {
-         player.status.isFullscreen = false;
-         document.webkitExitFullscreen();
-     }
- }
-
- // try to make echap functionnal
- function exit_fullscreen() {
-     player.status.isFullscreen = false;
-     document.webkitExitFullscreen();
-
- }
+ // function fullscreen() {
+ //     if (!player.status.isFullscreen) {
+ //         player.status.isFullscreen = true;
+ //         player.el.container.webkitRequestFullScreen();
+ //
+ //     } else {
+ //         player.status.isFullscreen = false;
+ //         document.webkitExitFullscreen();
+ //     }
+ // }
+ //
+ // // try to make echap functionnal
+ // function exit_fullscreen() {
+ //     player.status.isFullscreen = false;
+ //     document.webkitExitFullscreen();
+ //
+ // }
