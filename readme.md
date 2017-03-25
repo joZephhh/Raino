@@ -2,6 +2,11 @@
 ## a electron native player
 ##### Currently in development, first release is close
 
+
+![alt text](https://github.com/jozephhh/Raino/raw/master/assets/img/screenshot.png "Screenshot of the project")
+
+
+
 #### Installation :
   - clone the repository and go at directory root
   - enter the following command with your favorite terminal : `npm install`
