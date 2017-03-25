@@ -79,9 +79,6 @@ event.sender.send('remote-init-answer', linkRemote)
 
  ipcMain.on('close-remote-win', (event, link) => {
          remoteWindow.webContents.send("remoteIsConnected");
-     setTimeout(function() {
-              remoteWindow.close();
-     },1000);
 
  })
 

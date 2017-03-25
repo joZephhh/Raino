@@ -4,21 +4,20 @@ html, body {
   padding: 0;
   margin: 0; }
   html .container, body .container {
-    width: 100%;
+    width: 200%;
     height: 100%;
     background: #2ecc71;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative; }
+    position: relative;
+    overflow: hidden; }
     html .container .remote, body .container .remote {
-      width: 99%;
-      height: 99%;
+      width: 50%;
+      height: 100%;
       margin: 0 auto;
       background: #343434;
       display: flex;
       flex-direction: column;
-      justify-content: space-around; }
+      justify-content: space-around;
+      float: left; }
       html .container .remote .line, body .container .remote .line {
         width: 100%;
         display: flex;
@@ -41,61 +40,35 @@ html, body {
         display: none; }
       html .container .remote.isPlaying .line a.toggle-play .fa-pause, body .container .remote.isPlaying .line a.toggle-play .fa-pause {
         display: inline; }
-    html .container .menu, body .container .menu {
-      position: absolute;
-      top: 0px;
-      left: 100%;
-      width: 100%;
+    html .container .playlist_videos, body .container .playlist_videos {
+      float: left;
+      width: 50%;
       height: 100%;
-      background: #343434; }
-      html .container .menu .menu-playlist, body .container .menu .menu-playlist {
+      background: #282828;
+      color: white;
+      font-family: sans-serif;
+      overflow: scroll; }
+      html .container .playlist_videos .playlist_el, body .container .playlist_videos .playlist_el {
         width: calc(100% - 5px);
-        height: 100%; }
-        html .container .menu .menu-playlist .playlist-el, body .container .menu .menu-playlist .playlist-el {
-          width: 100%;
-          height: calc(100% /4);
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          border-right: 5px solid rgba(139, 231, 40, 0);
-          transition: border 0.3s;
+        height: 20vh;
+        line-height: 20vh;
+        text-align: center; }
+        html .container .playlist_videos .playlist_el.active, body .container .playlist_videos .playlist_el.active {
+          background: black;
+          border-right: 5px solid #2ecc71;
           position: relative;
-          z-index: 5; }
-          html .container .menu .menu-playlist .playlist-el:hover, body .container .menu .menu-playlist .playlist-el:hover {
-            border-right: 5px solid #2ecc71;
-            background: #1e1e1e; }
-          html .container .menu .menu-playlist .playlist-el.active, body .container .menu .menu-playlist .playlist-el.active {
-            border-right: 5px solid #2ecc71; }
-            html .container .menu .menu-playlist .playlist-el.active::after, body .container .menu .menu-playlist .playlist-el.active::after {
-              content: "";
-              width: 0;
-              height: 0;
-              border-style: solid;
-              border-width: 10px 10px 10px 0;
-              border-color: transparent #2ecc71 transparent transparent;
-              position: absolute;
-              top: calc(50% - 10px);
-              right: 0; }
-          html .container .menu .menu-playlist .playlist-el .playlist-el-pic, body .container .menu .menu-playlist .playlist-el .playlist-el-pic {
-            height: 100%;
-            width: 150px;
-            background-position: right;
-            background-repeat: no-repeat;
-            background-size: cover;
-            position: relative;
-            z-index: -1; }
-          html .container .menu .menu-playlist .playlist-el .playlist-el-info, body .container .menu .menu-playlist .playlist-el .playlist-el-info {
-            width: 150px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100%;
-            position: relative;
-            z-index: -1; }
-            html .container .menu .menu-playlist .playlist-el .playlist-el-info p, body .container .menu .menu-playlist .playlist-el .playlist-el-info p {
-              color: white;
-              font-family: sans-serif;
-              margin: 0;
-              padding: 0; }
-              html .container .menu .menu-playlist .playlist-el .playlist-el-info p:nth-of-type(2), body .container .menu .menu-playlist .playlist-el .playlist-el-info p:nth-of-type(2) {
-                font-size: 10px; }
+          overflow: hidden; }
+          html .container .playlist_videos .playlist_el.active:after, body .container .playlist_videos .playlist_el.active:after {
+            content: "";
+            width: 30px;
+            height: 30px;
+            background: #2ecc71;
+            top: 50%;
+            transform: rotate(45deg) translateX(-50%);
+            position: absolute;
+            right: -30px; }
+        html .container .playlist_videos .playlist_el h3, body .container .playlist_videos .playlist_el h3 {
+          padding: 0;
+          margin: 0; }
+
+/*# sourceMappingURL=remote.css.map */

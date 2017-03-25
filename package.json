@@ -11,8 +11,9 @@
   "author": "Joseph Q. - josephquercia.fr",
   "license": "ISC",
   "dependencies": {
+    "electron": "^1.4.1",
     "express": "^4.14.0",
-    "socketio": "^1.0.0",
-    "electron": "^1.4.1"
+    "open": "0.0.5",
+    "socketio": "^1.0.0"
   }
 }

@@ -23,6 +23,23 @@ body {
       -moz-box-shadow: 10px 10px 81px 0 rgba(0, 0, 0, 0.75);
       box-shadow: 10px 10px 81px 0 rgba(0, 0, 0, 0.75);
       background: black; }
+      body .container .player .modal {
+        position: absolute;
+        top: 10px;
+        z-index: 10000000;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px 80px;
+        background: #2ecc71;
+        color: white;
+        font-family: sans-serif;
+        opacity: 1;
+        transition: 0.3s opacity;
+        will-change: oapcity;
+        border-radius: 7px;
+        font-size: 12px; }
+        body .container .player .modal.remove {
+          opacity: 0; }
       body .container .player .playlist {
         width: 300px;
         height: 70%;

@@ -60,8 +60,12 @@ io.on('connection', function(socket) {
         io.to(socket.roomIn).emit("remoteReady");
     })
     // when database is sent
-    socket.on("database", function(tab, indexPlaylist) {
-            io.to(socket.roomIn).emit("database", tab, indexPlaylist);
+    socket.on("addVideos", function(tab, index) {
+        io.to(socket.roomIn).emit("addVideos", tab, index);
+    })
+
+    socket.on("updateIndex", function(index) {
+        io.to(socket.roomIn).emit("updateIndex", index);
     })
 
     // events
@@ -104,9 +108,7 @@ io.on('connection', function(socket) {
     socket.on("changeVideo",function(index){
             io.to(socket.roomIn).emit("changeVideo", index);
     })
-    socket.on("indexChange", function(index) {
-        io.to(socket.roomIn).emit("indexChange", index);
-    })
+
 
     // on disconnect
     socket.on("disconnect", function() {

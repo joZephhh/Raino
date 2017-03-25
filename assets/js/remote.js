@@ -22,6 +22,7 @@ remote.el.sound_up = remote.el.sound_bar.querySelector(".sound-up");
 remote.el.sound_down = remote.el.sound_bar.querySelector(".sound-down");
 remote.el.mute_and_playlist = remote.el.remote.querySelector(".mute-playlist-bar");
 remote.el.mute = remote.el.mute_and_playlist.querySelector(".mute");
+remote.el.playlist = remote.el.container.querySelector(".playlist_videos");
 
 // get the room who link desktop and the remote
 function getUrlVars() {
@@ -50,6 +51,12 @@ socket.on("remoteAnswer", function(answer) {
 
 
 // player events
+var playlist=[];
+
+socket.on("addVideos", function(tab, index) {
+    playlist = JSON.parse(tab);
+    updatePlaylist(index);
+})
 socket.on("videoPlay", function() {
     remote.el.remote.classList.add("isPlaying");
 })
@@ -64,13 +71,8 @@ socket.on("autoModeStatus", function(status) {
         remote.el.auto_mode.classList.remove("active");
     }
 })
-socket.on("indexChange", function(indexPlaylist) {
-    for (var o = 0; o < remote.el.playlist_el.length; o++) {
-        // remove "active" css class to all element (.playlist-el) of .playlist
-        remote.el.playlist_el[o].classList.remove("active")
-    }
-    // add "active" class to the current index element of .playlist
-    remote.el.playlist_el[indexPlaylist].classList.add("active")
+socket.on("updateIndex", function(index) {
+    currentIndex(index);
 })
 
 // if the player is disconnected
@@ -161,3 +163,39 @@ remote.el.mute.addEventListener("click", function(e) {
     e.preventDefault();
     socket.emit("mute");
 })
+
+    var playlist_els = [];
+// functions
+function updatePlaylist(index) {
+     playlist_els = remote.el.playlist.querySelectorAll(".playlist_el");
+    for (var i = 0; i < playlist_els.length; i++) {
+        playlist_els[i].remove();
+    }
+    for (var i = 0; i < playlist.length; i++) {
+        var el = document.createElement("div");
+        el.classList.add("playlist_el");
+        el.setAttribute("index",i);
+        var el_title = document.createElement("h3");
+        el_title.innerText = playlist[i].name;
+        el.append(el_title);
+        remote.el.playlist.append(el);
+
+    }
+    var save_index = index;
+    currentIndex(save_index);
+    playlist_els = remote.el.playlist.querySelectorAll(".playlist_el");
+    for (var i = 0; i < playlist_els.length; i++) {
+        playlist_els[i].addEventListener("click", function(e) {
+            e.preventDefault();
+            socket.emit("changeVideo", parseInt(this.getAttribute("index")));
+        })
+    }
+}
+
+function currentIndex(index) {
+    playlist_els = remote.el.playlist.querySelectorAll(".playlist_el");
+    for (var i = 0; i < playlist_els .length; i++) {
+        playlist_els [i].classList.remove("active");
+    }
+    playlist_els[index].classList.add("active");
+}

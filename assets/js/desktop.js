@@ -86,6 +86,7 @@ function getIPs(callback){
 
 
 const {ipcRenderer} = require('electron');
+var open = require("open");
 
 
 // create player object
@@ -103,6 +104,7 @@ player.el.controls_plus = player.el.container.querySelector(".controls-plus");
 player.el.controls_top = player.el.container.querySelector(".controls-top");
 player.el.remote_btn = player.el.controls_top.querySelector(".remote");
 player.el.playlist_btn = player.el.controls_top.querySelector(".playlist_icon");
+player.el.help_btn = player.el.controls_top.querySelector(".help");
 player.el.remote_menu = player.el.container.querySelector(".menu-remote");
 player.el.toggle_play = player.el.controls.querySelector(".toggle-play");
 player.el.back_btn = player.el.controls.querySelector(".go-prev");
@@ -127,15 +129,33 @@ player.status.nb_vol = 1;
 player.status.indexPlaylist = 0;
 player.status.isAuto = true;
 player.status.isConnected = false;
+player.status.playlistInit = false;
 
+
+// modal
+var modal_message = function(nb) {
+    this.nb = nb;
+    this.show = function() {
+        var el = document.createElement("p");
+        el.classList.add("modal");
+        el.innerHTML = this.nb + " élément(s) ajouté(s) à la playlist. Cliquer sur <i class='fa fa-bars' aria-hidden='true'></i> ";
+        player.el.container.append(el);
+        setTimeout(function(){
+            el.classList.add("remove");
+
+        },3000);
+        setTimeout(function(){
+            el.remove();
+        },3500)
+    }
+}
 document.ondragover = document.ondrop = (ev) => {
   ev.preventDefault()
 }
 
 document.body.ondrop = (ev) => {
-
+    new modal_message(ev.dataTransfer.files.length).show()
     player.el.container.classList.remove("isPlaying");
-    console.log(ev.dataTransfer.files.length + " fichiers ajoutés à la file d'attente")
     for (var i = 0; i < ev.dataTransfer.files.length; i++) {
             playlist.push(
                 {
@@ -169,11 +189,17 @@ document.body.ondrop = (ev) => {
 
         })
     }
-    player.el.video.setAttribute("src",ev.dataTransfer.files[0].path);
-    player.el.thumbmail_screen.setAttribute("src",ev.dataTransfer.files[0].path);
-  player.el.player_bar.classList.add("active");
- player.el.dragMe.remove();
- console.log(playlist);
+    if (player.status.isConnected) {
+        socket.emit("addVideos", JSON.stringify(playlist),player.status.indexPlaylist );
+    }
+    if (!player.status.playlistInit) {
+        player.el.video.setAttribute("src",ev.dataTransfer.files[0].path);
+        player.el.thumbmail_screen.setAttribute("src",ev.dataTransfer.files[0].path);
+        player.el.player_bar.classList.add("active");
+      player.el.dragMe.remove();
+      player.status.playlistInit = true;
+    }
+
    ev.preventDefault()
  }
 
@@ -187,8 +213,9 @@ document.body.ondrop = (ev) => {
  socket.emit("roomRequest", room);
  socket.on("roomAnswer", function(answer) {
      if (answer) {
-         console.log("connected")
          player.status.isConnected = true;
+
+
      } else {
          room = randomString();
          socket.emit("roomRequest", room);
@@ -197,6 +224,7 @@ document.body.ondrop = (ev) => {
  ipcRenderer.send('open-remote', "http://" + monIP + ":8080/remote.html?id=" + room+"");
  // remote ready event
  socket.on("remoteReady", function() {
+     socket.emit("addVideos", JSON.stringify(playlist),player.status.indexPlaylist);
      ipcRenderer.send("close-remote-win");
 
 
@@ -316,7 +344,10 @@ document.body.ondrop = (ev) => {
  player.el.sound_btn.addEventListener("click", function(e) {
      mute();
  })
-
+player.el.help_btn.addEventListener("click", function(e) {
+    e.preventDefault();
+    open("https://github.com/joZephhh/Raino/blob/master/readme.md");
+})
  player.el.back_btn.addEventListener("click", function(e) {
      //check if this is a double click
      isDbclick++
@@ -589,6 +620,9 @@ function updatePlaylist(index) {
         player.el.playlist_els[j].classList.remove("active");
     }
     player.el.playlist_els[index].classList.add("active");
+    if (player.status.isConnected) {
+        socket.emit("updateIndex", index);
+    }
 }
  // function fullscreen() {
  //     if (!player.status.isFullscreen) {
