@@ -95,7 +95,6 @@ event.sender.send('remote-init-answer', linkRemote)
 
 
 mainWindow.setAspectRatio(1.7777777778)
-mainWindow.openDevTools();
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),

@@ -139,7 +139,9 @@ var modal_message = function(nb) {
         var el = document.createElement("p");
         el.classList.add("modal");
         el.innerHTML = this.nb + " élément(s) ajouté(s) à la playlist. Cliquer sur <i class='fa fa-bars' aria-hidden='true'></i> ";
-        player.el.container.append(el);
+        console.log(el);
+        console.log(player.el.container);
+        player.el.container.appendChild(el);
         setTimeout(function(){
             el.classList.add("remove");
 
@@ -170,13 +172,13 @@ document.body.ondrop = (ev) => {
             var title = document.createElement("h3");
             title.innerText= ev.dataTransfer.files[i].name;
 
-            playlist_el.append(title);
+            playlist_el.appendChild(title);
             var video_el = document.createElement("video");
             video_el.setAttribute("src", ev.dataTransfer.files[i].path);
 
 
             // playlist_el.append(path);
-            player.el.playlist.append(playlist_el);
+            player.el.playlist.appendChild(playlist_el);
 
 
 }
@@ -221,6 +223,7 @@ document.body.ondrop = (ev) => {
          socket.emit("roomRequest", room);
      }
  })
+ console.log("http://" + monIP + ":8080/remote.html?id=" + room+"");
  ipcRenderer.send('open-remote', "http://" + monIP + ":8080/remote.html?id=" + room+"");
  // remote ready event
  socket.on("remoteReady", function() {
